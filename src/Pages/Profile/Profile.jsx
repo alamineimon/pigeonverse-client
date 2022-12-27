@@ -127,7 +127,7 @@ const Profile = () => {
             <button className="bg-white border border-blue-400 text-blue-400 font-semibold  py-2 px-6 text-center rounded leading-tight hover:text-white hover:bg-blue-400 hover:border-blue-400">SUBMIT</button>
           </div>
         </from>
-          <div className="space-y-2 absolute top-[200px] right-[300px]">
+          <div className="space-y-2 absolute top-[200px] right-[305px]">
             <div className="buttons flex">
               <button onClick={() => setIsReadOnly(prev => !prev)} className="update">Edite</button>
               {/* <button onClick={handleCancel} className="cancel">Cancel</button> */}

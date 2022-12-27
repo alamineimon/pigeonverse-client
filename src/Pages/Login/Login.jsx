@@ -1,7 +1,46 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useContext } from "react";
+import { useForm } from "react-hook-form";
+import { toast } from "react-hot-toast";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { AuthContext } from "../../context/AuthProvider";
 
 const Login = () => {
+  const { signInWithGoogle, signin } = useContext(AuthContext);
+
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+  } = useForm();
+
+  const handleSignIn = (data) => {
+    console.log(data);
+    signin(data.email, data.password)
+      .then((result) => {
+        const user = result.user;
+        toast("User login successfully");
+        navigate(from, { replace: true });
+        console.log(user);
+      })
+      .catch((err) => {
+        console.error(err.message);
+      });
+  };
+
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
+  const gandleGoogleSignIn = () => {
+    signInWithGoogle().then((result) => {
+      console.log(result.user);
+      navigate(from, { replace: true });
+    });
+  };
+
+
+
+
+
   return (
     <div className="flex  justify-center items-center px-32">
       <div className="flex w-[900px] mt-10 justify-center items-center">
@@ -18,7 +57,9 @@ const Login = () => {
         </div>
         <div className="flex w-1/2 justify-center items-center">
           <div>
-            <form>
+            <form
+            onSubmit={handleSubmit(handleSignIn)}
+            >
               <h3 className="text-2xl mb-6">LOGIN</h3>
 
               <div className="">
@@ -26,35 +67,62 @@ const Login = () => {
                   <label htmlFor="Useremail">User Email</label>
                 </div>
                 <input
-                  type="text"
-                  placeholder="Useremail"
-                  className="pl-2 py-1 pr-6 border-2 focus:outline-blue-400 rounded border-gray-400"
-                  name="Useremail"
-                />
+                {...register("email", {
+                  required: "Email Address is required",
+                })}
+                aria-invalid={errors.email ? "true" : "false"}
+                type="email"
+                placeholder="Enter Your Email Here"
+                className="pl-2 py-1 pr-6 border-2 focus:outline-blue-400 rounded border-gray-400"
+                data-temp-mail-org="0"
+              />
+              {errors.email && (
+                <span className="text-red-500 text-sm" role="alert">
+                  {errors.email?.message}
+                </span>
+              )}
               </div>
               <div className="mt-2 mb-6">
                 <div className=" text-sm">
                   <label htmlFor="Userpassword">User Password</label>
                 </div>
                 <input
-                  type="password"
-                  placeholder="Userpassword"
-                  className="pl-2 py-1 pr-6 border-2 focus:outline-blue-400 rounded border-gray-400"
-                  name="Userpassword"
-                />
+                {...register("password", {
+                  required: "Password is required",
+                  minLength: {
+                    value: 6,
+                    message: "Password must be 6 charecter or more",
+                  },
+                })}
+                aria-invalid={errors.password ? "true" : "false"}
+                placeholder="*******"
+                className="pl-2 py-1 pr-6 border-2 focus:outline-blue-400 rounded border-gray-400"
+              />
+              {errors.password && (
+                <span className="text-red-500 text-sm" role="alert">
+                  {errors.password?.message}
+                </span>
+              )}
               </div>
 
               <div>
-                <Link>
+              <input
+                type="submit"
+                value="LOGIN"
+                className="bg-white border border-blue-400 text-blue-400 font-semibold  py-2 w-full text-center rounded leading-tight hover:text-white hover:bg-blue-400 hover:border-blue-400"
+                placeholder="LOGIN}"
+              />
+                {/* <Link>
                   <p className="bg-white border border-blue-400 text-blue-400 font-semibold  py-1 text-center rounded leading-tight hover:text-white hover:bg-blue-400 hover:border-blue-400">
                     LOGIN
                   </p>
-                </Link>
+                </Link> */}
               </div>
             </form>
             <p className="pt-4 pb-1 text-xs">Login with social accounts</p>
             <div>
               <button
+              onClick={gandleGoogleSignIn}
                 aria-label="Log in with Google"
                 className="bg-white border border-blue-400 text-blue-400 font-semibold  py-1 w-full text-center rounded leading-tight hover:text-white hover:bg-blue-400 hover:border-blue-400"
               >
