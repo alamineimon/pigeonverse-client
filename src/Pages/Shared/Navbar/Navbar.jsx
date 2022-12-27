@@ -107,9 +107,9 @@ const Navbar = () => {
               <div>
                 <div onClick={() => setOpen(!open)} className="user-pic">
                   {user?.photoURL ? (
-                    <img className="h-12 rounded-full" src={user?.photoURL} alt="" />
+                    <img className="h-12 rounded-full cursor-pointer" src={user?.photoURL} alt="" />
                   ) : (
-                    <img className="h-12 rounded-full"
+                    <img className="h-12 rounded-full cursor-pointer"
                       src="https://i.ibb.co/bRZmT6x/blank-profile-picture-973460-340.webp"
                       alt=""
                     />
