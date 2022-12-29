@@ -4,6 +4,7 @@ import Home from "../Pages/Home/Home";
 import Login from "../Pages/Login/Login";
 import Media from "../Pages/Media/Media";
 import Message from "../Pages/Message/Message";
+import DetailsPost from "../Pages/Post/DetailsPost";
 import Profile from "../Pages/Profile/Profile";
 import Register from "../Pages/Register/Register";
 
@@ -36,6 +37,14 @@ const router = createBrowserRouter([
           path: "/message",
           element: <Message />,
         },
+        {
+          path: "/detailspost/:id",
+          element: <DetailsPost />,
+          loader: ({ params }) =>
+            fetch(
+              `http://localhost:5000/posts/${params.id}`
+            ),
+        }
       ],
     },
     

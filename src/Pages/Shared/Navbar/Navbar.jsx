@@ -31,29 +31,13 @@ const Navbar = () => {
       </li>
       <li>
         <Link
-          to="/gallery"
+          to="/profile"
           className="hover:bg-white hover:text-blue-400 hover:px-8  "
-        >
-          GELLARY
-        </Link>
-      </li>
-      <li>
-        <Link
-          to="/blog"
-          className="hover:bg-white hover:text-blue-400 hover:px-8  "
-        >
-          BLOGS
-        </Link>
-      </li>
-
-      <li>
-        <Link
-          to="/about"
-          className="hover:bg-white hover:text-blue-400 hover:px-8 "
         >
           ABOUT
         </Link>
       </li>
+      
     </React.Fragment>
   );
 
