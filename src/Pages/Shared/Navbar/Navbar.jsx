@@ -5,7 +5,6 @@ import ProfileDropDown from "./ProfileDropDown";
 
 const Navbar = () => {
   const { user } = useContext(AuthContext);
-  console.log(user);
   const [open, setOpen] = useState(false);
   const menuItems = (
     <React.Fragment>
@@ -16,18 +15,18 @@ const Navbar = () => {
       </li>
       <li>
         <Link
-          to="/shop"
+          to="/media"
           className="hover:bg-white hover:text-blue-400 hover:px-8  "
         >
-          SHOP
+          MEDIA
         </Link>
       </li>
       <li>
         <Link
-          to="/menu"
+          to="/message"
           className="hover:bg-white hover:text-blue-400 hover:px-8 "
         >
-          MENU
+          MESSAGE
         </Link>
       </li>
       <li>

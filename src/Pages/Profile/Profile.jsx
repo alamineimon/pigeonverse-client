@@ -112,7 +112,7 @@ const Profile = () => {
                 </label>
               </div>
               <textarea
-              
+              disabled={isReadOnly}
                 type="text"
                 name="bio"
                 id="bio"
