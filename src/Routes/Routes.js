@@ -13,55 +13,55 @@ import ErrorPage from "../Pages/Shared/ErroePage/ErrorPage";
 import PrivateRoute from "./PrivateRoute";
 
 const router = createBrowserRouter([
-    {
-      path: "/",
-      element: <Main />,
-      errorElement:<ErrorPage/>,
-      children: [
-        {
-          path: "/",
-          element: <Home />,
-        },
-        {
-          path: "/login",
-          element: <Login />,
-        },
-        {
-          path: "/register",
-          element: <Register />,
-        },
-        {
-          path: "/profile",
-          element:<Profile />,
-        },
-        {
-          path: "/media",
-          element: <Media />,
-        },
-        {
-          path: "/message",
-          element: <Message />,
-        },
-        {
-          path: "/createpost",
-          element: <PrivateRoute><CreatePost /></PrivateRoute>
-        },
-        {
-          path: "/editeprofile",
-          element: <EditeProfile />,
-        },
-        {
-          path: "/detailspost/:id",
-          element: <DetailsPost />,
-          loader: ({ params }) =>
-            fetch(
-              `http://localhost:5000/posts/${params.id}`
-            ),
-        }
-      ],
-    },
-    
-  ]);
-  
-  export default router;
-  
+  {
+    path: "/",
+    element: <Main />,
+    errorElement: <ErrorPage />,
+    children: [
+      {
+        path: "/",
+        element: <Home />,
+      },
+      {
+        path: "/login",
+        element: <Login />,
+      },
+      {
+        path: "/register",
+        element: <Register />,
+      },
+      {
+        path: "/profile",
+        element: <Profile />,
+      },
+      {
+        path: "/media",
+        element: <Media />,
+      },
+      {
+        path: "/message",
+        element: <Message />,
+      },
+      {
+        path: "/createpost",
+        element: (
+          <PrivateRoute>
+            <CreatePost />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/editeprofile",
+        element: <EditeProfile />,
+      },
+      {
+        path: "/detailspost/:id",
+        element: <DetailsPost />,
+        loader: ({ params }) =>
+          fetch(`https://pigeonverse-server.vercel.app/posts/${params.id}`),
+      },
+    ],
+  },
+]);
+
+export default router;

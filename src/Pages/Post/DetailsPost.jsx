@@ -4,7 +4,7 @@ import { Link, useLoaderData, useNavigate } from "react-router-dom";
 const DetailsPost = (props) => {
   const detailsPost = useLoaderData();
   console.log(detailsPost);
-  
+
   const navigate = useNavigate();
 
   const { photo, userPhoto, name, details } = detailsPost;
@@ -13,7 +13,7 @@ const DetailsPost = (props) => {
   const handlePostComment = (event) => {
     event.preventDefault();
 
-    fetch(`http://localhost:5000/posts/${detailsPost._id}`, {
+    fetch(`https://pigeonverse-server.vercel.app/posts/${detailsPost._id}`, {
       method: "PATCH",
       headers: {
         "content-type": "application/json",
@@ -23,7 +23,7 @@ const DetailsPost = (props) => {
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
-        navigate('/media')
+        navigate("/media");
       });
   };
 
@@ -34,7 +34,6 @@ const DetailsPost = (props) => {
     newUser[field] = value;
     setUser(newUser);
   };
-
 
   return (
     <div>

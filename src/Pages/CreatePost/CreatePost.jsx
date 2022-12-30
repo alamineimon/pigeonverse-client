@@ -41,7 +41,7 @@ const CreatePost = () => {
           console.log(post);
 
           //  save the product to the mongodb
-          fetch("http://localhost:5000/posts", {
+          fetch("https://pigeonverse-server.vercel.app/posts", {
             method: "POST",
             headers: {
               "content-type": "application/json",

@@ -7,7 +7,8 @@ import { AuthContext } from "../../context/AuthProvider";
 import SmallSpinner from "../Shared/Spinner/SmallSpinner";
 
 const Register = () => {
-  const { signInWithGoogle,loading, setLoading, updateUser, createUser } = useContext(AuthContext);
+  const { signInWithGoogle, loading, setLoading, updateUser, createUser } =
+    useContext(AuthContext);
 
   const {
     register,
@@ -17,8 +18,7 @@ const Register = () => {
 
   const handleSignUp = (data) => {
     // console.log(data);
-    createUser(data.email, data.password)
-    .then(result =>{
+    createUser(data.email, data.password).then((result) => {
       const user = result.user;
       toast.success("User created successfully");
       const userInfo = {
@@ -26,15 +26,15 @@ const Register = () => {
       };
       console.log(userInfo);
       updateUser(userInfo)
-      .then(()=>{
-        saveUser(data.name, data.email)
-      })
-      .catch((err) => console.log(err));
-    })
-  }
+        .then(() => {
+          saveUser(data.name, data.email);
+        })
+        .catch((err) => console.log(err));
+    });
+  };
   const saveUser = (name, email) => {
-    const user = { name, email  };
-    fetch(`http://localhost:5000/users`, {
+    const user = { name, email };
+    fetch(`https://pigeonverse-server.vercel.app/users`, {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -45,7 +45,7 @@ const Register = () => {
       .then((data) => {
         navigate(from, { replace: true });
         console.log(data);
-        setLoading(false)
+        setLoading(false);
         // setCreatedUserEmail(email)
       });
   };
@@ -59,17 +59,21 @@ const Register = () => {
       navigate(from, { replace: true });
     });
   };
-  if(loading){
-    return <div className="h-[500px] w-100vh flex justify-center items-center"><Puff
-    height="80"
-    width="80"
-    radius={1}
-    color="#38afd1"
-    ariaLabel="puff-loading"
-    wrapperStyle={{}}
-    wrapperClass=""
-    visible={true}
-  /></div>
+  if (loading) {
+    return (
+      <div className="h-[500px] w-100vh flex justify-center items-center">
+        <Puff
+          height="80"
+          width="80"
+          radius={1}
+          color="#38afd1"
+          ariaLabel="puff-loading"
+          wrapperStyle={{}}
+          wrapperClass=""
+          visible={true}
+        />
+      </div>
+    );
   }
   return (
     <div className="lg:flex sm:block  justify-center items-center px-32">
@@ -87,9 +91,7 @@ const Register = () => {
         </div>
         <div className="flex w-1/2 justify-center items-center">
           <div>
-            <form
-            onSubmit={handleSubmit(handleSignUp)}
-            >
+            <form onSubmit={handleSubmit(handleSignUp)}>
               <h3 className="text-2xl mb-6 sm:text-center">REGISTER</h3>
               <div className="">
                 <div className="text-sm">
@@ -109,7 +111,6 @@ const Register = () => {
                   </span>
                 )}
               </div>
-
 
               <div className="">
                 <div className="text-sm">
@@ -152,12 +153,9 @@ const Register = () => {
                 )}
               </div>
 
-
-
-
               <input
                 type="submit"
-                value={loading ? <SmallSpinner></SmallSpinner> : 'REGISTER'}
+                value={loading ? <SmallSpinner></SmallSpinner> : "REGISTER"}
                 className="bg-white border mt-2 px-20 border-blue-400 text-blue-400 font-semibold  py-1 text-center rounded leading-tight hover:text-white hover:bg-blue-400 hover:border-blue-400"
                 placeholder="REGISTER}"
               />
