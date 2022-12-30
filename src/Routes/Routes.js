@@ -6,13 +6,17 @@ import Login from "../Pages/Login/Login";
 import Media from "../Pages/Media/Media";
 import Message from "../Pages/Message/Message";
 import DetailsPost from "../Pages/Post/DetailsPost";
+import EditeProfile from "../Pages/Profile/EditeProfile";
 import Profile from "../Pages/Profile/Profile";
 import Register from "../Pages/Register/Register";
+import ErrorPage from "../Pages/Shared/ErroePage/ErrorPage";
+import PrivateRoute from "./PrivateRoute";
 
 const router = createBrowserRouter([
     {
       path: "/",
       element: <Main />,
+      errorElement:<ErrorPage/>,
       children: [
         {
           path: "/",
@@ -28,7 +32,7 @@ const router = createBrowserRouter([
         },
         {
           path: "/profile",
-          element: <Profile />,
+          element:<Profile />,
         },
         {
           path: "/media",
@@ -40,7 +44,11 @@ const router = createBrowserRouter([
         },
         {
           path: "/createpost",
-          element: <CreatePost />,
+          element: <PrivateRoute><CreatePost /></PrivateRoute>
+        },
+        {
+          path: "/editeprofile",
+          element: <EditeProfile />,
         },
         {
           path: "/detailspost/:id",

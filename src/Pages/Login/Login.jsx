@@ -54,17 +54,17 @@ const Login = () => {
   }
 
   return (
-    <div className="flex  justify-center items-center px-32">
-      <div className="flex w-[900px] mt-10 justify-center items-center">
-        <div className="flex w-1/2 -mr-12 justify-center items-center">
+    <div className="lg:flex sm:block  justify-center items-center px-32">
+      <div className="lg:flex sm:block lg:w-[900px] sm:w-[500px] mt-10 justify-center items-center">
+        <div className="flex w-1/2 lg:-mr-12 justify-center items-center">
           <img
             src="https://i.ibb.co/1rBnjFw/pigeon-logo.png"
-            className="h-[300px] w-1/2"
+            className="h-[300px] w-full"
             alt=""
           />
           <div className="w-1/2">
-            <h1 className="text-3xl font-semibold w-full">Pigeon Verse</h1>
-            <h6>Explore the ideas throughout the world</h6>
+            <h1 className="lg:text-3xl sm:text-sm font-semibold w-full">Pigeon Verse</h1>
+            <h6 className="sm:text-xs">Explore the ideas throughout the world</h6>
           </div>
         </div>
         <div className="flex w-1/2 justify-center items-center">

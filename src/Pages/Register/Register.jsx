@@ -72,15 +72,15 @@ const Register = () => {
   /></div>
   }
   return (
-    <div className="flex  justify-center items-center px-32">
-      <div className="flex w-[900px] mt-10 justify-center items-center">
-        <div className="flex w-1/2 -mr-12 justify-center items-center">
+    <div className="lg:flex sm:block  justify-center items-center px-32">
+      <div className="lg:flex sm:block lg:w-[900px] sm:w-[600px] mt-10 justify-center items-center">
+        <div className="lg:flex sm:blcok lg:w-1/2 lg:-mr-12 justify-center items-center">
           <img
             src="https://i.ibb.co/1rBnjFw/pigeon-logo.png"
-            className="h-[300px] w-1/2"
+            className="h-[300px]  sm:w-full lg:w-1/2"
             alt=""
           />
-          <div className="w-1/2">
+          <div className="lg:w-1/2 sm:w-full">
             <h1 className="text-3xl font-semibold w-full">Pigeon Verse</h1>
             <h6>Explore the ideas throughout the world</h6>
           </div>
@@ -90,7 +90,7 @@ const Register = () => {
             <form
             onSubmit={handleSubmit(handleSignUp)}
             >
-              <h3 className="text-2xl mb-6">REGISTER</h3>
+              <h3 className="text-2xl mb-6 sm:text-center">REGISTER</h3>
               <div className="">
                 <div className="text-sm">
                   <label htmlFor="Username">User Name</label>
@@ -151,28 +151,6 @@ const Register = () => {
                   </span>
                 )}
               </div>
-
-{/* 
-              <div className="">
-                <div className="text-sm">
-                  <label htmlFor="Username">User Name</label>
-                </div>
-                <input
-                  {...register("phone", { required: true })}
-                  aria-invalid={errors.phone ? "true" : "false"}
-                  type="text"
-                  placeholder="phone"
-                  className="pl-2 py-1 pr-6 border-2 focus:outline-blue-400 rounded border-gray-400"
-                  // value="Username"
-                />
-                {errors.phone?.type === "required" && (
-                  <span className="text-red-500 text-sm" role="alert">
-                    Number is Required
-                  </span>
-                )}
-              </div> */}
-
-
 
 
 

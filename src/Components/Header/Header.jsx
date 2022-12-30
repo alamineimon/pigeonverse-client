@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 
 const Header = () => {
   return (
-    <div className="hero h-[480px]" style={{ backgroundImage: `url("https://placeimg.com/1000/800/arch")` }}>
+    <div className="hero h-[480px]" style={{ backgroundImage: `url("https://i.ibb.co/z8B2Gt1/20210929-homepage-header-staff-shortage-V11.webp")` }}>
     <div className="hero-overlay bg-opacity-60"></div>
     <div className="hero-content text-center text-neutral-content">
       <div className=" px-32">

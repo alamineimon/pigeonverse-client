@@ -51,26 +51,26 @@ const Post = ({ posts }) => {
 
   return (
     <div>
-      <div className="px-[300px]">
+      <div className="lg:px-[300px] sm:px-2">
         <div className="flex">
           {posts?.userPhoto ? (
-            <img src={userPhoto} className="rounded-full h-16 mr-4" alt="" />
+            <img src={userPhoto} className="rounded-full h-16 w-16  mr-4" alt="" />
           ) : (
             <img
-              className="h-12 rounded-full cursor-pointer"
+              className="h-16 w-16 rounded-full cursor-pointer"
               src="https://i.ibb.co/bRZmT6x/blank-profile-picture-973460-340.webp"
               alt=""
             />
           )}
 
-          <div className="felx mt-2 h-16">
+          <div className="felx mt-2 lg:h-16">
             <p className="text-blue-400 mt-2">{name}</p>
             <p className="text-sm">Times:</p>
           </div>
         </div>
-        <p className="text-justify pr-3 mb-3">{details}</p>
+        <p className="text-justify lg:pr-3 mb-3 sm:w-full">{details}</p>
 
-        <img src={photo} className="h-[350px] w-full mb-3 rounded-md" alt="" />
+        <img src={photo} className="lg:h-[350px] sm:h-[120px] lg:max-w-fit  mb-3 rounded-md" alt="" />
         <div className="flex justify-between">
           <span className="text-blue-400 ">{like} likes</span>
           <span className="text-blue-400 pr-2">
@@ -94,7 +94,7 @@ const Post = ({ posts }) => {
           </div>
           <Link
             to={`/detailspost/${_id}`}
-            className="bg-white border mt-2 px-20 border-blue-400 text-blue-400 font-semibold  py-1 text-center rounded leading-tight hover:text-white hover:bg-blue-400 hover:border-blue-400"
+            className="bg-white border mt-2 lg:px-20 sm:px-12 border-blue-400 text-blue-400 font-semibold  py-1 text-center rounded leading-tight hover:text-white hover:bg-blue-400 hover:border-blue-400"
           >
             SHOWMOE
           </Link>

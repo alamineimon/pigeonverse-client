@@ -52,8 +52,8 @@ const CreatePost = () => {
             .then((result) => {
               toast("Successfully post created ");
               console.log(result);
+              navigate('/media');
               setloading(false);
-              navigate("/media");
             });
         }
       });

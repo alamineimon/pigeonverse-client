@@ -1,11 +1,13 @@
-import React, { useContext, useState } from "react";
-import { Link } from "react-router-dom";
-import { AuthContext } from "../../context/AuthProvider";
+import React, { useContext, useState } from 'react'
+import { useLoaderData } from 'react-router-dom';
+import { AuthContext } from '../../context/AuthProvider';
 
-
-const Profile = () => {
+const EditeProfile = () => {
     const { user } = useContext(AuthContext);
     const [isReadOnly, setIsReadOnly] = useState(true)
+    const detailsPost = useLoaderData();
+    console.log(detailsPost);
+  console.log(user);
   return (
     <div className=" mt-16 px-64 ">
       <div className=" p-10">
@@ -45,7 +47,7 @@ const Profile = () => {
                   First Name
                 </label>
                 <input
-                 disabled={isReadOnly}
+                 
                   type="text"
                   name="firstName"
                   id="firstName"
@@ -60,7 +62,7 @@ const Profile = () => {
                   Last Name
                 </label>
                 <input
-                 disabled={isReadOnly}
+                 
                   type="text"
                   name="lastName"
                   id="lastName"
@@ -77,7 +79,7 @@ const Profile = () => {
                 Email address
               </label>
               <input
-               disabled={isReadOnly}
+               
                 required
                 type="email"
                 name="email"
@@ -96,7 +98,7 @@ const Profile = () => {
                 </label>
               </div>
               <input
-               disabled={isReadOnly}
+               
                 type="number"
                 name="phoneNumber"
                 id="phoneNumber"
@@ -112,7 +114,7 @@ const Profile = () => {
                 </label>
               </div>
               <textarea
-              disabled={isReadOnly}
+              
                 type="text"
                 name="bio"
                 id="bio"
@@ -129,7 +131,7 @@ const Profile = () => {
         </from>
           <div className="space-y-2 absolute top-[200px] right-[305px]">
             <div className="buttons flex">
-              <Link to='/editeprofile' className="update">Edite</Link>
+              <button onClick={() => setIsReadOnly(prev => !prev)} className="update">Edite</button>
               {/* <button onClick={handleCancel} className="cancel">Cancel</button> */}
             </div>
           </div>
@@ -138,4 +140,5 @@ const Profile = () => {
   );
 };
 
-export default Profile;
+
+export default EditeProfile

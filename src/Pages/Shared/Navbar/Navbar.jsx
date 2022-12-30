@@ -43,7 +43,7 @@ const Navbar = () => {
 
   return (
     <div>
-      <div className="navbar px-20 bg-blue-400 text-white">
+      <div className="navbar lg:px-20 bg-blue-400 text-white">
         <div className="navbar-start">
           <div className="dropdown">
             <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -74,20 +74,14 @@ const Navbar = () => {
             className="h-16"
             alt=""
           />
-          <span className="text-2xl">PIGEON VERSE</span>
+          <span className="lg:text-2xl">PIGEON VERSE</span>
         </div>
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1">{menuItems}</ul>
         </div>
         <div className="navbar-end">
-          {/* <Link to="/login">
-            <p className="bg-white border border-blue-400 text-blue-400 font-semibold  py-2 px-6 text-center rounded leading-tight">
-              LOGON
-            </p>
-          </Link> */}
           {user?.uid ? (
             <>
-              {/* <Link to="/bookATable">BOOK A TABLE</Link> */}
               <div>
                 <div onClick={() => setOpen(!open)} className="user-pic">
                   {user?.photoURL ? (
@@ -138,7 +132,7 @@ const Navbar = () => {
             </li> */}
             </>
           ) : (
-              <Link to="/login" className="bg-white border border-blue-400 px-8 text-blue-400 font-semibold  py-2 text-center rounded leading-tight">LOGIN</Link>
+              <Link to="/login" className="bg-white border cursor-pointer border-blue-400 px-8 text-blue-400 font-semibold  py-2 text-center rounded leading-tight">LOGIN</Link>
           )}
         </div>
       </div>
