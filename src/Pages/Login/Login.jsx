@@ -3,9 +3,12 @@ import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthProvider";
+import SmallSpinner from "../Shared/Spinner/SmallSpinner";
+import { BallTriangle, Bars, InfinitySpin, Puff } from "react-loader-spinner";
 
 const Login = () => {
-  const { signInWithGoogle, signin } = useContext(AuthContext);
+  const { signInWithGoogle, user,loading, setLoading, signin } =
+    useContext(AuthContext);
 
   const {
     register,
@@ -20,9 +23,9 @@ const Login = () => {
         const user = result.user;
         toast("User login successfully");
         navigate(from, { replace: true });
-        console.log(user);
       })
       .catch((err) => {
+        setLoading(false);
         console.error(err.message);
       });
   };
@@ -33,13 +36,22 @@ const Login = () => {
   const gandleGoogleSignIn = () => {
     signInWithGoogle().then((result) => {
       console.log(result.user);
+      setLoading(false);
       navigate(from, { replace: true });
     });
   };
-
-
-
-
+  if(loading){
+    return <div className="h-[500px] w-100vh flex justify-center items-center"><Puff
+    height="80"
+    width="80"
+    radius={1}
+    color="#38afd1"
+    ariaLabel="puff-loading"
+    wrapperStyle={{}}
+    wrapperClass=""
+    visible={true}
+  /></div>
+  }
 
   return (
     <div className="flex  justify-center items-center px-32">
@@ -57,9 +69,7 @@ const Login = () => {
         </div>
         <div className="flex w-1/2 justify-center items-center">
           <div>
-            <form
-            onSubmit={handleSubmit(handleSignIn)}
-            >
+            <form onSubmit={handleSubmit(handleSignIn)}>
               <h3 className="text-2xl mb-6">LOGIN</h3>
 
               <div className="">
@@ -67,62 +77,72 @@ const Login = () => {
                   <label htmlFor="Useremail">User Email</label>
                 </div>
                 <input
-                {...register("email", {
-                  required: "Email Address is required",
-                })}
-                aria-invalid={errors.email ? "true" : "false"}
-                type="email"
-                placeholder="Enter Your Email Here"
-                className="pl-2 py-1 pr-6 border-2 focus:outline-blue-400 rounded border-gray-400"
-                data-temp-mail-org="0"
-              />
-              {errors.email && (
-                <span className="text-red-500 text-sm" role="alert">
-                  {errors.email?.message}
-                </span>
-              )}
+                  {...register("email", {
+                    required: "Email Address is required",
+                  })}
+                  aria-invalid={errors.email ? "true" : "false"}
+                  type="email"
+                  placeholder="Enter Your Email Here"
+                  className="pl-2 py-1 pr-6 border-2 focus:outline-blue-400 rounded border-gray-400"
+                  data-temp-mail-org="0"
+                />
+                {errors.email && (
+                  <span className="text-red-500 text-sm" role="alert">
+                    {errors.email?.message}
+                  </span>
+                )}
               </div>
               <div className="mt-2 mb-6">
                 <div className=" text-sm">
                   <label htmlFor="Userpassword">User Password</label>
                 </div>
                 <input
-                {...register("password", {
-                  required: "Password is required",
-                  minLength: {
-                    value: 6,
-                    message: "Password must be 6 charecter or more",
-                  },
-                })}
-                aria-invalid={errors.password ? "true" : "false"}
-                placeholder="*******"
-                className="pl-2 py-1 pr-6 border-2 focus:outline-blue-400 rounded border-gray-400"
-              />
-              {errors.password && (
-                <span className="text-red-500 text-sm" role="alert">
-                  {errors.password?.message}
-                </span>
-              )}
+                  {...register("password", {
+                    required: "Password is required",
+                    minLength: {
+                      value: 6,
+                      message: "Password must be 6 charecter or more",
+                    },
+                  })}
+                  aria-invalid={errors.password ? "true" : "false"}
+                  placeholder="*******"
+                  className="pl-2 py-1 pr-6 border-2 focus:outline-blue-400 rounded border-gray-400"
+                />
+                {errors.password && (
+                  <span className="text-red-500 text-sm" role="alert">
+                    {errors.password?.message}
+                  </span>
+                )}
               </div>
 
               <div>
-              <input
-                type="submit"
-                value="LOGIN"
-                className="bg-white border border-blue-400 text-blue-400 font-semibold  py-2 w-full text-center rounded leading-tight hover:text-white hover:bg-blue-400 hover:border-blue-400"
-                placeholder="LOGIN}"
-              />
-                {/* <Link>
-                  <p className="bg-white border border-blue-400 text-blue-400 font-semibold  py-1 text-center rounded leading-tight hover:text-white hover:bg-blue-400 hover:border-blue-400">
-                    LOGIN
-                  </p>
-                </Link> */}
+                {/* <input
+                  type="submit"
+                  value={loading ? <BallTriangle
+                    height={100}
+                    width={100}
+                    radius={5}
+                    color="#000000"
+                    ariaLabel="ball-triangle-loading"
+                    wrapperClass={{}}
+                    wrapperStyle=""
+                    visible={true}
+                  /> : "LOGIN"}
+                  className="bg-white border border-blue-400 text-blue-400 font-semibold  py-2 w-full text-center rounded leading-tight hover:text-white hover:bg-blue-400 hover:border-blue-400"
+                  placeholder="LOGIN}"
+                /> */}
+
+                <button
+                  type="submit"
+                  className="bg-white  border border-blue-400 text-blue-400 font-semibold h-10 w-full text-center rounded leading-tight hover:text-white hover:bg-blue-400 hover:border-blue-400"
+                > LOGIN
+                </button>
               </div>
             </form>
             <p className="pt-4 pb-1 text-xs">Login with social accounts</p>
             <div>
               <button
-              onClick={gandleGoogleSignIn}
+                onClick={gandleGoogleSignIn}
                 aria-label="Log in with Google"
                 className="bg-white border border-blue-400 text-blue-400 font-semibold  py-1 w-full text-center rounded leading-tight hover:text-white hover:bg-blue-400 hover:border-blue-400"
               >

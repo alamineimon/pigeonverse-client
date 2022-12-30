@@ -1,5 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import Main from "../Layout/Main/Main";
+import CreatePost from "../Pages/CreatePost/CreatePost";
 import Home from "../Pages/Home/Home";
 import Login from "../Pages/Login/Login";
 import Media from "../Pages/Media/Media";
@@ -36,6 +37,10 @@ const router = createBrowserRouter([
         {
           path: "/message",
           element: <Message />,
+        },
+        {
+          path: "/createpost",
+          element: <CreatePost />,
         },
         {
           path: "/detailspost/:id",

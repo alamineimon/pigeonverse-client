@@ -22,8 +22,8 @@ const Media = () => {
     return <SmallSpinner />;
   }
   return (
-    <div>
-      <div className="grid grid-cols-1 gap-6">
+    <div className="py-6">
+      <div className="grid grid-cols-1 gap-12">
         {posts.map((posts) => (
           <Post key={posts._id} posts={posts}></Post>
         ))}

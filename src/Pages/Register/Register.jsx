@@ -1,11 +1,13 @@
 import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
+import { Puff } from "react-loader-spinner";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthProvider";
+import SmallSpinner from "../Shared/Spinner/SmallSpinner";
 
 const Register = () => {
-  const { signInWithGoogle, updateUser, createUser } = useContext(AuthContext);
+  const { signInWithGoogle,loading, setLoading, updateUser, createUser } = useContext(AuthContext);
 
   const {
     register,
@@ -31,7 +33,7 @@ const Register = () => {
     })
   }
   const saveUser = (name, email) => {
-    const user = { name, email };
+    const user = { name, email  };
     fetch(`http://localhost:5000/users`, {
       method: "POST",
       headers: {
@@ -43,6 +45,7 @@ const Register = () => {
       .then((data) => {
         navigate(from, { replace: true });
         console.log(data);
+        setLoading(false)
         // setCreatedUserEmail(email)
       });
   };
@@ -56,6 +59,18 @@ const Register = () => {
       navigate(from, { replace: true });
     });
   };
+  if(loading){
+    return <div className="h-[500px] w-100vh flex justify-center items-center"><Puff
+    height="80"
+    width="80"
+    radius={1}
+    color="#38afd1"
+    ariaLabel="puff-loading"
+    wrapperStyle={{}}
+    wrapperClass=""
+    visible={true}
+  /></div>
+  }
   return (
     <div className="flex  justify-center items-center px-32">
       <div className="flex w-[900px] mt-10 justify-center items-center">
@@ -94,6 +109,7 @@ const Register = () => {
                   </span>
                 )}
               </div>
+
 
               <div className="">
                 <div className="text-sm">
@@ -135,9 +151,35 @@ const Register = () => {
                   </span>
                 )}
               </div>
+
+{/* 
+              <div className="">
+                <div className="text-sm">
+                  <label htmlFor="Username">User Name</label>
+                </div>
+                <input
+                  {...register("phone", { required: true })}
+                  aria-invalid={errors.phone ? "true" : "false"}
+                  type="text"
+                  placeholder="phone"
+                  className="pl-2 py-1 pr-6 border-2 focus:outline-blue-400 rounded border-gray-400"
+                  // value="Username"
+                />
+                {errors.phone?.type === "required" && (
+                  <span className="text-red-500 text-sm" role="alert">
+                    Number is Required
+                  </span>
+                )}
+              </div> */}
+
+
+
+
+
+
               <input
                 type="submit"
-                value="REGISTER"
+                value={loading ? <SmallSpinner></SmallSpinner> : 'REGISTER'}
                 className="bg-white border mt-2 px-20 border-blue-400 text-blue-400 font-semibold  py-1 text-center rounded leading-tight hover:text-white hover:bg-blue-400 hover:border-blue-400"
                 placeholder="REGISTER}"
               />

@@ -2,11 +2,12 @@ import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
 import { AiFillFileImage } from "react-icons/ai";
+import { Puff } from "react-loader-spinner";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthProvider";
 
 const CreatePost = () => {
-  const { user } = useContext(AuthContext);
+  const { user, loading, setloading } = useContext(AuthContext);
   const {
     register,
     formState: { errors },
@@ -14,82 +15,98 @@ const CreatePost = () => {
   } = useForm();
   const navigate = useNavigate();
 
-
-  const handleApost =(data)=>{
+  const handleApost = (data) => {
     const image = data.img_url[0];
-    console.log(image)
+    console.log(image);
     const formData = new FormData();
     formData.append("image", image);
     const url =
       "https://api.imgbb.com/1/upload?key=8ab0829af0fdf06d333782b540e01bbb";
     // console.log(url);
     fetch(url, {
-        method: "POST",
-        body: formData,
-      })
-        .then((res) => res.json())
-        .then((imgData) => {
-          if (imgData.success) {
-            const post = {
-              
-              details: data.details,
-              name: user.displayName,
-              email: user.email, 
-              userPhoto: user.photoURL,
-              photo: imgData.data.display_url,
-              
-            };
-  
-            console.log(post);
-  
-            //  save the product to the mongodb
-            fetch("http://localhost:5000/posts", {
-              method: "POST",
-              headers: {
-                "content-type": "application/json",
-                
-              },
-              body: JSON.stringify(post),
-            })
-              .then((res) => res.json())
-              .then((result) => {
-                toast('Successfully post created ');
-                navigate('/media')
-                
-              });
-          }
-        });
-  }
+      method: "POST",
+      body: formData,
+    })
+      .then((res) => res.json())
+      .then((imgData) => {
+        if (imgData.success) {
+          const post = {
+            details: data.details,
+            name: user.displayName,
+            email: user.email,
+            userPhoto: user.photoURL,
+            photo: imgData.data.display_url,
+          };
+
+          console.log(post);
+
+          //  save the product to the mongodb
+          fetch("http://localhost:5000/posts", {
+            method: "POST",
+            headers: {
+              "content-type": "application/json",
+            },
+            body: JSON.stringify(post),
+          })
+            .then((res) => res.json())
+            .then((result) => {
+              toast("Successfully post created ");
+              console.log(result);
+              setloading(false);
+              navigate("/media");
+            });
+        }
+      });
+  };
+
+  // if(loading
+  //   ){
+  //   return <div className="h-[500px] w-100vh flex justify-center items-center"><Puff
+  //   height="80"
+  //   width="80"
+  //   radius={1}
+  //   color="#38afd1"
+  //   ariaLabel="puff-loading"
+  //   wrapperStyle={{}}
+  //   wrapperClass=""
+  //   visible={true}
+  // /></div>
+  // }
 
   return (
     <div>
-      <div className="flex justify-center">
+      <div className="flex h-[500px] items-center justify-center">
         <div className=" p-5 w-[550px] bg-base-300">
           <div className=" flex mb-10 justify-center items-center">
             <div className=" ">
-              {/* <div className="">
-                {user?.photoURL ? (
+              <div className=" justify-start mb-6 items-center">
+                <div className="ml-4 text-left">
+                  <div className="flex mb-2 justify-start items-center">
+                  {user?.photoURL ? (
                   <img
-                    className="w-20 mb-2  text-left rounded-full"
+                    className="h-12 rounded-full"
                     src={user?.photoURL}
                     alt=""
                   />
                 ) : (
                   <img
-                    className="w-24 rounded-full"
+                    className="h-12 rounded-full"
                     src="https://i.ibb.co/bRZmT6x/blank-profile-picture-973460-340.webp"
                     alt=""
                   />
                 )}
-              </div> */}
+                  </div>
+                  <p className="text-blue-400">{user?.displayName}</p>
+                  <p className="text-sm">{user?.email}</p>
+                </div>
+              </div>
               <form
-              onSubmit={handleSubmit( handleApost )}
+                onSubmit={handleSubmit(handleApost)}
                 noValidate=""
                 action=""
                 className="ng-untouched ng-pristine ng-valid"
               >
                 <div className=" flex">
-                  
                   <textarea
                     id="message"
                     rows={1}
